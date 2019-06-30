@@ -1,13 +1,29 @@
 
+// const precioMaquina = componente => {
+//     let precioTotal = 0;
+//     const precio = precioComponente => precioComponente.componente === componente;
+//     const precioFilter = local.precios.filter(precio);
+//     precioTotal+= local.precios.componente;
 
-const precioMaquina = componentes => {
-    const precioComponentes = precio => precio.precio === componentes;
-    const filtrarPrecios;
+//     return precioTotal;
+// }
 
-    return filtrarPrecios;
+let componente = [];
+
+const precioMaquina = (componente) => {
+    let precioTotal = 0;
+    for(const component of componente) {
+        for(const precio of local.precios) {
+            if(component === precio.componente) {
+            precioTotal += precio.precio;
+            }
+        }
+    }
+    
+  return precioTotal;
 }
 
-console.log(precioMaquina('Monitor GPRS 3000', 'Motherboard ASUS 1500'));
+console.log(precioMaquina(['Motherboard ASUS 1500', 'Motherboard ASUS 1500']));
 
 const vendedoraDelMes = (mes, anio) => {
 
