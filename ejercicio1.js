@@ -33,6 +33,9 @@ console.log(precioMaquina(['Motherboard ASUS 1500', 'Motherboard ASUS 1500']));
 
 // 3. vendedoraDelMes(); Peu
 
+
+// 4. ventasMes(); Leri
+
 const ventasMes = (mes, anio) => {
     let ventasUnMes = 0;
     const ventasPorMes = local.ventas.filter(venta => venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio)
@@ -41,11 +44,6 @@ const ventasMes = (mes, anio) => {
     }
     return ventasUnMes;
 }
-
-console.log(vendedoraDelMes(1, 2019)); 
-
-// 4. ventasMes(); Leri
-
 // 5. ventasVendedora(); Peu
 
 const ventasVendedora = nombre => {
