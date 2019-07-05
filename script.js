@@ -63,15 +63,38 @@ const componenteMasVendido = () => {
     return componenteActual;
 }
 
+// Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
 
-
-
-
-
-
-// renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
-
-const renderPorMes = () => {
-
+const ventaSucursal = sucursal => {
+    ventasTotales = 0;
+    for(const venta of local.ventas) {
+        if(sucursal === local.sucursal) {
+            ventasTotales += precioMaquina(venta.componentes);
+        }
+    }
+    return ventasTotales;
 }
 
+
+
+
+
+// // renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
+
+// const renderPorMes = () => {
+
+// }
+
+// renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
+
+const renderPorSucursal = () => {
+    let listaSucursal = 'Total de ';
+    let lista = '';
+    let total = 0;
+
+    for(const sucursal of local.sucursales) {
+        total = ventasTotales(sucursal);
+        lista = `${listaSucursal} ${sucursal}: ${total}`;
+    }
+    return total;
+}

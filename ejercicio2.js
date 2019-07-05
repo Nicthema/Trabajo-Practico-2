@@ -1,11 +1,17 @@
+/* ***********************************************************************************************
+2.1 En las ventas ya existentes, tenemos que agregar la propiedad sucursal con el valor Centro (ya que es la sucursal original). 
+Agregar al objeto principal la propiedad sucursales: ['Centro', 'Caballito']
+*********************************************************************************************** */
 
-for(const sucursales of local.ventas) {
+for (const sucursales of local.ventas) {
     sucursales.sucursal = "Centro";
 }
 
-local.surcursales = ['Centro', 'Caballito'];
+local.sucursales = ['Centro', 'Caballito'];
 
-// 12/02/2019 es new Date(2019, 1, 12)
+/* ***********************************************************************************************
+2.2 Cargar la siguiente información en el array ventas, creando sus respectivos objetos siguiendo el patrón: fecha, nombreVendedora, componentes, sucursal
+*********************************************************************************************** */
 
 let agregarObjetosNuevos = [
     {
@@ -49,19 +55,19 @@ let agregarObjetosNuevos = [
         nombreVendedora: 'Grace',
         componentes: ['Motherboard MZI', 'RAM Quinston'],
         sucursal: 'Centro'
-    }, 
+    },
     {
         fecha: new Date(2019, 01, 08),
         nombreVendedora: 'Sheryl',
         componentes: ['Monitor ASC 543', 'HDD Wezter Dishital'],
         sucursal: 'Centro'
-    }, 
+    },
     {
         fecha: new Date(2019, 01, 16),
         nombreVendedora: 'Sheryl',
-        componentes:  ['Monitor GPRS 3000', 'RAM Quinston Fury'],
+        componentes: ['Monitor GPRS 3000', 'RAM Quinston Fury'],
         sucursal: 'Centro'
-    }, 
+    },
     {
         fecha: new Date(2019, 01, 27),
         nombreVendedora: 'Hedy',
@@ -102,7 +108,47 @@ let agregarObjetosNuevos = [
 
 ]
 
-for(const objects of agregarObjetosNuevos) {
+for (const objects of agregarObjetosNuevos) {
     local.ventas.push(objects);
 }
 
+
+
+/* ***********************************************************************************************
+2.3 Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
+*********************************************************************************************** */
+
+const ventasSucursal = sucursal => {
+    let ventasTotales = 0;
+    for (const venta of local.ventas) {
+        if (venta.sucursal === sucursal) {
+            ventasTotales += precioMaquina(venta.componentes);
+        }
+    }
+    return ventasTotales;
+}
+
+// console.log(ventasSucursal('Centro'));
+
+
+/* ***********************************************************************************************
+Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
+*********************************************************************************************** */
+
+const ventasTotales = (x) => {
+    let ventasTotales = 0;
+    for (const venta of local.ventas) {
+        if (venta.sucursal === x || venta.nombreVendedora === x) {
+            ventasTotales += precioMaquina(venta.componentes);
+        }
+    }
+    return ventasTotales;
+}
+
+// console.log(ventasTotales('Centro'));
+// console.log(ventasTotales('Grace'));
+
+
+/* ***********************************************************************************************
+2.4 Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
+*********************************************************************************************** */
