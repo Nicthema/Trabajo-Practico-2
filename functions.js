@@ -13,7 +13,7 @@ const precioMaquina = (componente) => {
         }
     }
     return precioTotal;
-}
+};
 
 console.log(precioMaquina(['Monitor GPRS 3000', 'Motherboard ASUS 1500']));
 
@@ -33,7 +33,7 @@ const cantidadVentasComponente = componente => {
         }
     }
     return cantidadComponentes;
-}
+};
 
 console.log(cantidadVentasComponente('Monitor ASC 543'));
 
@@ -59,7 +59,7 @@ const vendedoraDelMes = (mes, anio) => {
         }
     }
     return nombreVendedora;
-}
+};
 
 console.log(vendedoraDelMes(1, 2019));
 
@@ -77,7 +77,7 @@ const ventasMes = (mes, anio) => {
         ventasUnMes += precioMaquina(venta.componentes);
     }
     return ventasUnMes;
-}
+};
 
 console.log(ventasMes(1, 2019));
 
@@ -95,7 +95,7 @@ const ventasVendedora = nombre => {
         }
     }
     return total;
-}
+};
 
 console.log(ventasVendedora('Grace'));
 
@@ -115,7 +115,7 @@ const componenteMasVendido = () => {
         }
     }
     return componenteActual;
-}
+};
 
 console.log(componenteMasVendido());
 
@@ -128,7 +128,7 @@ const huboVentas = (mes, anio) => {
     const ventasPorMes = local.ventas.some(venta => venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio);
 
     return ventasPorMes;
-}
+};
 
 console.log(huboVentas(3, 2019));
 
@@ -146,7 +146,7 @@ const ventasSucursal = sucursal => {
         }
     }
     return ventasTotales;
-}
+};
 
 console.log(ventasSucursal('Centro'));
 
@@ -164,7 +164,7 @@ const ventasTotales = (sucursalOvendedora) => {
         }
     }
     return total;
-}
+};
 
 console.log(ventasTotales('Centro'));
 console.log(ventasTotales('Grace'));
@@ -192,7 +192,7 @@ const sucursalDelMes = (mes, anio) => {
         }
     }
     return nombreSucursal;
-}
+};
 
 console.log(sucursalDelMes());
 
@@ -201,20 +201,36 @@ console.log(sucursalDelMes());
 3.1 renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
 *********************************************************************************************** */
 
+const obtenerAnio = () => {
+    let anios = [];
+    let fechaAnterior = 0;
+
+    for (const venta of local.ventas) {
+        if (venta.fecha.getFullYear() !== fechaAnterior) {
+            anios.push(venta.fecha.getFullYear());
+            fechaAnterior = venta.fecha.getFullYear();
+        }
+    }
+    return anios;
+};
+
+
 const renderPorMes = () => {
     let total = 0;
     let lista = '';
-    let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    for (let i = 0; i < meses.length; i++) {
-        total = ventasMes(i, 2019)
-        if (total > 0) {
-            lista += `Total de ${meses[i]} de 2019: ${total}
+    for (const anio of obtenerAnio()) {
+        for (let i = 0; i < meses.length; i++) {
+            total = ventasMes(i, anio)
+            if (total > 0) {
+                lista += `Total de ${meses[i]} de ${anio}: ${total}
 `;
+            }
         }
     }
     return lista;
-}
+};
 
 console.log(renderPorMes());
 
@@ -233,7 +249,7 @@ const renderPorSucursal = () => {
 `;
     }
     return lista;
-}
+};
 
 console.log(renderPorSucursal());
 
@@ -253,7 +269,7 @@ const vendedoraConMasIngresos = () => {
         }
     }
     return vendedoraConMasIngresos;
-}
+};
 
 const render = () => `Reporte:
 Ventas por mes:
